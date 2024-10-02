@@ -1,31 +1,25 @@
 # Integrated Task and Knowledge Assistant with Programmable Policies
 
-KITA is a programmable framework for creating task-oriented conversational agents that are designed to handle complex user interactions.
-Unlike LLMs, KITA provides reliable grounded responses, with controllable agent policies through its expressive specification, KITA Worksheet.
+Genie is a programmable framework for creating task-oriented conversational agents that are designed to handle complex user interactions.
+Unlike LLMs, Genie provides reliable grounded responses, with controllable agent policies through its expressive specification, Genie Worksheet.
 In contrast to dialog trees, it is resilient to diverse user queries, helpful with knowledge sources, and offers ease of programming policies through its declarative paradigm.
+
+Note: This is not the complete codebase for Genie. This doesn't support knowledge bases and is a simplified version of Genie.
 
 ## Installation
 
-To install KITA, you can use pip:
+To install Genie, you can use pip:
 
 ```bash
-git clone https://github.com/stanford-oval/worksheets.git
+git clone https://github.com/stanford-oval/worksheets_assignment.git
 cd worksheets
 pip install -r requirements.txt
-python -m spacy download en_core_web_sm
-conda install pytorch::faiss-gpu
 pip install -e .
-```
-
-For knowledge assitants, you will have to install SUQL. You can do this by running:
-
-```bash
-pip install suql
 ```
 
 ## Creating Agents
 
-You can use KITA to create a KITA agents by writing a dialogue specification in a spreadsheet (We are working on a python-like syntax for writing specification). 
+You can use Genie to create a Genie agents by writing a dialogue specification in a spreadsheet (We are working on a python-like syntax for writing specification). 
 
 
 ### Spreadsheet Specification
