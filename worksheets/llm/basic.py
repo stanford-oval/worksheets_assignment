@@ -93,7 +93,7 @@ async def llm_generate(
     if prompt_dir is None:
         prompt_dir = os.path.join(current_dir, "..", "prompts")
     if "azure/" in model_name:
-        ChatOpenAI(
+        llm = ChatOpenAI(
             openai_api_base="https://cs224v-litellm.genie.stanford.edu",
             model=model_name.split("azure/")[1],
             api_key=os.environ["CS224V_API_KEY"],
