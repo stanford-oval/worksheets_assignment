@@ -15,7 +15,9 @@ from loguru import logger
 current_dir = os.path.dirname(os.path.realpath(__file__))
 
 date_today = datetime.date.today().strftime("%Y-%m-%d")
-logfile = os.path.join(current_dir, "..", "..", "logs", f"worksheets-{date_today}.log")
+if not os.path.exists(os.path.join(current_dir, "logs")):
+    os.makedirs(os.path.join(current_dir, "logs"))
+logfile = os.path.join(current_dir, "logs", f"worksheets-{date_today}.log")
 
 logger.add(logfile)
 
@@ -111,6 +113,7 @@ async def llm_generate(
             azure_deployment=model_name.replace("azure/", ""),
             streaming=stream,
             **oval_config_params,
+            **llm_params,
         )
     else:
         llm = ChatOpenAI(
