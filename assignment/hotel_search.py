@@ -37,5 +37,9 @@ def hotel_search(
         "hotel_name": hotel_name,
         "location": location,
         "cost": cost,
-        "rating": random.randint(min_rating, max_rating),
+        "rating": (
+            random.randint(min_rating, max_rating)
+            if min_rating != max_rating
+            else min_rating
+        ),
     }
