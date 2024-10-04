@@ -20,13 +20,13 @@ def hotel_search(
     max_rating_limit = 5
 
     if hotel_name is None or hotel_name == "NA":
-        hotel_name = random.sample(["ShadySide Inn", "Grand Hotel", "Hilton Hotel"])
+        hotel_name = random.choices(["ShadySide Inn", "Grand Hotel", "Hilton Hotel"])
 
     if location is None or location == "NA":
-        location = random.sample(["New York", "San Francisco", "Los Angeles"])
+        location = random.choices(["New York", "San Francisco", "Los Angeles"])
 
     if cost is None or cost == "NA":
-        cost = random.sample(["cheap", "moderate", "expensive"])
+        cost = random.choices(["cheap", "moderate", "expensive"])
 
     if min_rating < min_rating_limit or min_rating > max_rating_limit:
         return {
