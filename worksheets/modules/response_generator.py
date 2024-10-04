@@ -42,7 +42,7 @@ async def generate_response(
         "response_generator.prompt",
         prompt_inputs=prompt_inputs,
         prompt_dir=bot.prompt_dir,
-        model_name="azure/gpt-4o",
+        model_name=bot.args["model"],
     )
 
     current_dlg_turn.system_response = agent_response

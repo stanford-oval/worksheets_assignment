@@ -9,7 +9,7 @@ from langchain.prompts import (
 )
 from langchain.schema import HumanMessage, StrOutputParser, SystemMessage
 from langchain_community.callbacks.manager import get_openai_callback
-from langchain_openai import ChatOpenAI
+from langchain_openai import AzureChatOpenAI, ChatOpenAI
 from loguru import logger
 
 current_dir = os.path.dirname(os.path.realpath(__file__))
@@ -81,6 +81,13 @@ def get_examples(example_path: str) -> List[Tuple[Any, Any]]:
     return list(zip(user_examples, ai_examples))
 
 
+oval_config_params = {
+    "api_key": os.getenv("AZURE_OPENAI_WS_KEY"),
+    "azure_endpoint": os.getenv("OVAL_ENDPOINT"),
+    "api_version": "2023-12-01-preview",
+}
+
+
 async def llm_generate(
     prompt_path: str,
     prompt_inputs: Dict[str, Any],
@@ -92,12 +99,18 @@ async def llm_generate(
 ) -> str:
     if prompt_dir is None:
         prompt_dir = os.path.join(current_dir, "..", "prompts")
-    if "azure/" in model_name:
+    if "litellm/" in model_name:
         llm = ChatOpenAI(
             openai_api_base="https://cs224v-litellm.genie.stanford.edu",
             model=model_name.split("azure/")[1],
             api_key=os.environ["CS224V_API_KEY"],
             **llm_params,
+        )
+    elif "azure/" in model_name:
+        llm = AzureChatOpenAI(
+            azure_deployment=model_name.replace("azure/", ""),
+            streaming=stream,
+            **oval_config_params,
         )
     else:
         llm = ChatOpenAI(

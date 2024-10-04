@@ -37,6 +37,12 @@ def create_parser():
         action="store_true",
         help="Will prompt the user to save the state of the chatbot",
     )
+    parser.add_argument(
+        "--model",
+        choices=["gpt4-o", "azure/gpt4-o", "litellm/gpt4-o"],
+        help="Model to use for the chatbot",
+        default="azure/gpt4-o",
+    )
 
     return parser
 
@@ -83,6 +89,7 @@ def convert_to_json(dialogue: list[CurrentDialogueTurn]):
 
 async def main(**args):
     bot = import_domain(args["domain"], args["spec_type"])
+    bot.args["model"] = args["model"]
     quit_commands = ["exit", "exit()"]
 
     save_file_name = f"log_json/chatbot_state_{date_str}.json"

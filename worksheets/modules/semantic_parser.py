@@ -224,14 +224,14 @@ async def user_utterance_to_user_target(
         "agent_actions": agent_acts if agent_acts else "None",
         "agent_utterance": agent_utterance,
         "description": bot.description,
-        "apis": bot.genie_worksheets
+        "apis": bot.genie_worksheets,
     }
 
     parsed_output = await llm_generate(
         prompt_file,
         prompt_inputs=prompt_inputs,
         prompt_dir=bot.prompt_dir,
-        model_name="azure/gpt-4o",
+        model_name=bot.args["model"],
         temperature=0.0,
     )
 
@@ -366,9 +366,8 @@ async def spinach_sp(
     bot: GenieRuntime,
     db_results: List[str] | None = None,
 ):
-    from suql.agent import DialogueTurn
-
     from knowledge_agent.agents.course_assistant.main import CourseAssistantAgent
+    from suql.agent import DialogueTurn
 
     suql_dlg_history = []
     for i, turn in enumerate(dlg_history):
