@@ -228,7 +228,7 @@ def discover_and_execute_global(context, bot):
         for obj in objects:
             if obj is None:
                 continue
-            if isinstance(obj, dict) and not isinstance(obj, GenieWorksheet):
+            if isinstance(obj, dict) or not isinstance(obj, GenieWorksheet):
                 continue
             if obj.is_complete(bot, context) and obj.action_performed is True:
                 continue
